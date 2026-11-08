@@ -1,0 +1,3 @@
+Customer account no,Document no,Date,Sender/receiver account,Sender/receiver name,Debit/Credit (D/C),Amount,Reference number,Archiving code,Description,Currency,Personal code or register code,Sender/receiver bank BIC,Ultimate debtor name,Transaction reference,Account servicer reference
+EE808066725555246147,4.01748680537205E+019,2026-09-04,EE288844491092508749,Counterparty 001,C,150,,52550683566929,Test 1,EUR,13874440,LHVBEE22XXX,,5210638233,5GSV09WB4RY8D749EF6M3C4690L0PJMR
+EE808066725555246147,52,2026-09-05,LT090127955041021683,Counterparty 002,D,-150,,5125228095065753,Test 2,EUR,,REVOLT21XXX,,7254461051,9J669CT830J6R829TM7U9U5409U0QGKY

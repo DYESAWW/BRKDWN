@@ -1,9 +1,30 @@
-import db
+import csv
+from contextlib import closing
+from . import db
 
 def export_db_to_csv(filename):
-	connection = db.get_connection()
-	rows = connection.fetchall()
-	with open(filename, "w", encoding="utf-8") as file:
-		file.write("Type,Date,Description,Amount,Currency,Balance")
+	with closing(db.get_connection()) as connection:
+		rows = connection.execute(
+			"""
+			SELECT type, date, description, amount, currency
+			FROM transactions
+			"""
+		).fetchall()
+
+	with open(filename, "w", encoding="utf-8", newline="") as file:
+		writer = csv.writer(file)
+
+		writer.writerow(
+			["Type", "Date", "Description", "Amount", "Currency"]
+		)
+
 		for row in rows:
-			file.write(f"")
+			writer.writerow(
+				[
+					row["type"],
+					row["date"],
+					row["description"],
+					row["amount"],
+					row["currency"],
+				]
+			)
