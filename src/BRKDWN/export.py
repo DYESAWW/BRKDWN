@@ -6,7 +6,7 @@ def export_db_to_csv(filename):
 	with closing(db.get_connection()) as connection:
 		rows = connection.execute(
 			"""
-			SELECT type, date, description, amount, currency
+			SELECT date, description, amount, currency
 			FROM transactions
 			"""
 		).fetchall()
@@ -15,13 +15,12 @@ def export_db_to_csv(filename):
 		writer = csv.writer(file)
 
 		writer.writerow(
-			["Type", "Date", "Description", "Amount", "Currency"]
+			["Date", "Description", "Amount", "Currency"]
 		)
 
 		for row in rows:
 			writer.writerow(
 				[
-					row["type"],
 					row["date"],
 					row["description"],
 					row["amount"],

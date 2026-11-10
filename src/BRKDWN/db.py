@@ -29,7 +29,7 @@ def init_db():
 def insert_from_parser_to_db(data):
 	with closing(get_connection()) as connection:
 		with connection:
-			for i in range(len(data["type"])):
+			for i in range(len(data)):
 				connection.execute(
 					"""
 					INSERT INTO transactions
