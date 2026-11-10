@@ -11,7 +11,7 @@ Tartu Ülikooli LTAT.03.001 põhine projekt.
 </strong>
 </div>
 
-### ARENDAMIS STACK:
+### ARENDUSKESKKOND:
 Projekt on peaaegu 100% kirjutatud Python programmerimiskeeles. Kasutajaliideseks on `textual` raamistik. Ning `textual` põhist kasutaja liidese välimust kirjeldatakse `.tcss` formaadis. Testid rakendame `pytest` tööriistaga. Andmebaasi jaoks on olemas `sqlite3`.
  
 ### FEATURES:
