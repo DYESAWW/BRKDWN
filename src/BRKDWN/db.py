@@ -1,11 +1,13 @@
 import sqlite3
 from contextlib import closing
+from pathlib import Path
+
+DB_PATH = Path("database.db")
 
 def get_connection():
-	connection = sqlite3.connect("database.db")
+	connection = sqlite3.connect(DB_PATH)
 	connection.row_factory = sqlite3.Row
 	return connection
-
 
 def init_db():
 	# with closing() ensures that connection is closed #
@@ -24,7 +26,6 @@ def init_db():
 				"""
 			)
 
-
 def insert_from_parser_to_db(data):
 	with closing(get_connection()) as connection:
 		with connection:
@@ -32,7 +33,7 @@ def insert_from_parser_to_db(data):
 				connection.execute(
 					"""
 					INSERT INTO transactions
-					(type, date, description, amount, currency)
+					(date, description, amount, currency)
 					VALUES (?, ?, ?, ?)
 					""",
 					(
@@ -42,7 +43,6 @@ def insert_from_parser_to_db(data):
 						data["currency"][i],
 					),
 				)
-
 
 def sum_incomes():
 	with closing(get_connection()) as connection:
@@ -67,3 +67,10 @@ def sum_costs():
 		).fetchone()
 
 	return result["total"] or 0
+
+def IsEmptyDB():
+	with closing(get_connection()) as connection:
+		result = connection.execute(
+			"SELECT EXISTS(SELECT 1 FROM transactions)"
+		).fetchone()
+	return not result[0]
