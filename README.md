@@ -30,8 +30,9 @@ pip install -e ".[dev]"
 Projekt on peaaegu 100% kirjutatud Python programmerimiskeeles. Kasutajaliideseks on `textual` raamistik. Ning `textual` põhist kasutaja liidese välimust kirjeldatakse `.tcss` formaadis. Testid rakendame `pytest` tööriistaga. Andmebaasi jaoks on olemas `sqlite3`.
  
 ### FEATURES:
-- Importeeri oma väljavõtet csv formaadis erinevatest pankadest.
-- Vaata oma sissetulukute ja kulude jaotust.
+- Importeeri oma väljavõtted csv formaadis erinevatest pankadest.
+- Pane neid kokku
+- Vaata oma üldist sissetulukute ja kulude jaotust.
 - Ekspordi kokkuväljavõtet edasiseks haldamiseks csv failina.
 
 ### TOETATAVAD PANGAD:
