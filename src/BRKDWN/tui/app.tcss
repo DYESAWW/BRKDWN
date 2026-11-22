@@ -1,15 +1,17 @@
-Screen {
-	background: #181926;
-}
+$accent: #e64553;
+$primary: #e5c890;
+$base: #181926;
+$surface: #1e2030;
+$text: #cad3f5;
 
 Static {
-	color: #e64553;
+	color: $accent;
 }
 
-Button {
+.button {
 	background: transparent;
-	color: #e64553;
-	border: round #e5c890;
+	color: $accent;
+	border: round $primary;
 }
 
 #layout {
@@ -34,13 +36,38 @@ Button {
 	align: center middle;
 }
 
-#about {
+#about-button {
 	margin-bottom: 1;
 	border: none;
 }
 
 #logo {
 	width: 100%;
-	color: #e5c890;
+	color: $primary;
 	text-align: center;
+}
+
+FileSelector {
+	align: center middle;
+}
+
+.dialog {
+	width: 80%;
+	height: 50%;
+	padding: 1 2;
+	border: round $primary;
+}
+
+.dialog-buttons {
+  background: transparent;
+  align: center middle;
+	color: $accent;
+	border: round $primary;
+}
+
+/* DirectoryTree classes overrides */
+DirectoryTree {
+
+	scrollbar-size-vertical: 1;
+	scrollbar-size-horizontal: 1;
 }
