@@ -1,40 +1,52 @@
-
 import csv
 
 def csv_to_dict_swedbank(input_csv):
-    VALIDATION_DICT = {
-        "estonian": ["Kliendi konto", "Reatüüp", "Kuupäev", "Saaja/Maksja",
-                     "Selgitus", "Summa", "Valuuta", "Deebet/Kreedit",
-                     "Arhiveerimistunnus", "Tehingu tüüp", "Viitenumber",
-                     "Dokumendi number"]
-    }
+	VALIDATION_DICT = {
+		"estonian": [
+			"Kliendi konto", "Reatüüp", "Kuupäev", "Saaja/Maksja", "Selgitus", "Summa", "Valuuta", "Deebet/Kreedit", "Arhiveerimistunnus", "Tehingu tüüp", "Viitenumber", "Dokumendi number"
+		],
+								
+		"english": [
+			"Client account", "Row type", "Date", "Beneficiary/Payer", "Details", "Amount", "Currency", "Debit/Credit", "Transfer reference", "Transaction type", "Reference number", "Document number"
+		],
 
-    data = {
-        "date": [],
-        "description": [],
-        "amount": [],
-        "currency": []
-    }
+		"russian": [
+			"Счëт клиентa", "Строковый тип", "Дата", "Получатель/Плательщик", "Пояснение", "Сумма", "Currency", "Дебит/Кредит", "Архивный признак", "Тип сделки", "Номер ссылки", "Номер документа"
+		]
+	}
 
-    with open(input_csv, encoding="utf-8-sig") as csvfile:
-        reader = csv.reader(csvfile, delimiter=";")
-        first_row = next(reader, None)
+	data = {
+		"date": [],
+		"description": [],
+		"amount": [],
+		"currency": []
+	}
 
-        if first_row is not None and first_row == VALIDATION_DICT["estonian"]:
-            for row in reader:
-                if row[1] == "20":
-                    date = row[2].split(".")
-                    data["date"].append(date[2] + date[1] + date[0])
-                    data["description"].append(row[4])
+	with open(input_csv, encoding="utf-8") as csvfile:
+		
+		reader = csv.reader(csvfile, delimiter=";")
+		first_row = next(reader, None)
 
-                    amount = float(row[5].replace(",", "."))
+		if first_row:
+			while first_row and first_row[-1] == "":
+				first_row.pop() # Remove empty columns in the end
 
-                    if row[7] == "K":
-                        amount = -amount
+		if first_row is not None and first_row in VALIDATION_DICT.values():
+			for row in reader:
+				if row[1] == "20":
+					date = row[2].split(".")
+					data["date"].append(date[2] + date[1] + date[0])
+					data["description"].append(row[4])
 
-                    data["amount"].append(amount)
-                    data["currency"].append(row[6])
-        else:
-            return -1
+					amount = float(row[5].replace(",", "."))
 
-    return data
+					if row[7] == "K":
+						amount = -amount
+
+					data["amount"].append(amount)
+					data["currency"].append(row[6])
+		else:
+			return -1
+
+	return data
+

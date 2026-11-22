@@ -4,8 +4,9 @@ from textual.theme import Theme
 
 from BRKDWN.db import IsEmptyDB
 from BRKDWN.tui.screens.import_screen import ImportScreen
+from BRKDWN.tui.screens.transactions import Transactions
 
-BRKDWN_THEME = Theme(
+BRKDWN_THEME = Theme( # declare theme
 	name="BRKDWN",
 	primary="#e5c890",
 	accent="#e64553",
@@ -24,9 +25,9 @@ class BrkdwnApp(App):
 	]
 
 	def on_mount(self) -> None:
-		self.register_theme(BRKDWN_THEME)
+		self.register_theme(BRKDWN_THEME) # set theme
 		self.theme = "BRKDWN"
 		if IsEmptyDB():
 			self.push_screen(ImportScreen())
-		# else:
-		# Here goes transactions screen
+		else:
+			self.push_screen(Transactions())

@@ -4,7 +4,8 @@ from textual.widgets import Static, Button
 from textual.containers import Vertical, Horizontal
 
 
-class ImportScreen(Screen):
+class Transactions(Screen):
 	def compose(self) -> ComposeResult:
 		yield Vertical(
+			Static("Transactions!")
 		)

@@ -6,6 +6,5 @@ def main():
 	init_db()
 	BrkdwnApp().run()
 
-
 if __name__ == "__main__":
 	main()

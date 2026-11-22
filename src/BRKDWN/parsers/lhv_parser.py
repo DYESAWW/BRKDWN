@@ -19,7 +19,7 @@ def csv_to_dict_lhv(input_csv):
 		"amount": [],
 		"currency": []
 	}
-	with open(input_csv) as csvfile:
+	with open(input_csv, encoding="utf-8") as csvfile:
 		reader = csv.reader(csvfile, delimiter=",") # set delimiter specific to each bank statement
 		first_row = next(reader, None) # skip first row
 		if first_row is None or first_row not in VALIDATION_DICT.values():
