@@ -1,4 +1,5 @@
-from textual.app import App, ComposeResult
+from textual.app import ComposeResult
+from textual.screen import Screen
 from textual.widgets import Static, Button
 from textual.containers import Vertical, Horizontal
 
@@ -13,8 +14,8 @@ LOGO = r"""
 ╚══════════════════════════════════════════════════════╝
 """
 
-class ImportScreen(App):
-	CSS_PATH = "../app.tcss"
+
+class ImportScreen(Screen):
 	def compose(self) -> ComposeResult:
 		yield Vertical(
 			Vertical(
@@ -22,12 +23,8 @@ class ImportScreen(App):
 				Horizontal(
 					Button("IMPORT", classes="button"),
 				),
-				classes="center"
+				classes="center",
 			),
-			Button("ABOUT", id="about"), # add about page
-			id="layout"
+			Button("ABOUT", id="about"),  # add about page
+			id="layout",
 		)
-
-
-def run_import_screen():
-	ImportScreen().run()
