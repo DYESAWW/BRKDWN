@@ -39,9 +39,8 @@ class ImportScreen(Screen):
 
 	def on_button_pressed(self, event: Button.Pressed) -> None:
 		if event.button.id == "import":
+			self.app.clear_notifications()
 			self.app.push_screen(FileSelector(), self.on_file_chosen)
-
-	
 
 	def on_file_chosen(self, path: Path | None) -> None:
 		"""Get path and use parser to import to db"""
