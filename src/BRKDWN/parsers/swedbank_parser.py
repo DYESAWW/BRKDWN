@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_swedbank(input_csv):
+def csv_to_dict_swedbank(input_csv) -> dict | -1:
 	VALIDATION_DICT = {
 		"estonian": [
 			"Kliendi konto", "Reatüüp", "Kuupäev", "Saaja/Maksja", "Selgitus", "Summa", "Valuuta", "Deebet/Kreedit", "Arhiveerimistunnus", "Tehingu tüüp", "Viitenumber", "Dokumendi number"
@@ -16,6 +16,7 @@ def csv_to_dict_swedbank(input_csv):
 	}
 
 	data = {
+		"IBAN": [],
 		"date": [],
 		"description": [],
 		"amount": [],
@@ -31,20 +32,21 @@ def csv_to_dict_swedbank(input_csv):
 			while first_row and first_row[-1] == "":
 				first_row.pop() # Remove empty columns in the end
 
-		if first_row is not None and first_row in VALIDATION_DICT.values():
+		if first_row is not None and first_row in VALIDATION_DICT.values(): # compare headers to confirm file validity
 			for row in reader:
-				if row[1] == "20":
+				if row[1] == "20": # 20 row type means transaction (anything else is irrelevant)
+					data["IBAN"].append(row[0])
 					date = row[2].split(".")
 					data["date"].append(date[2] + date[1] + date[0])
 					data["description"].append(row[4])
+					data["currency"].append(row[6])
 
 					amount = float(row[5].replace(",", "."))
 
-					if row[7] == "K":
+					if row[7] == "K": # debit/credit
 						amount = -amount
 
 					data["amount"].append(amount)
-					data["currency"].append(row[6])
 		else:
 			return -1
 

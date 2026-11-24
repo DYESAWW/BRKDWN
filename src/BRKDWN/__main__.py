@@ -4,7 +4,7 @@ from BRKDWN.tui.app import BrkdwnApp
 
 def main():
 	init_db()
-	BrkdwnApp().run()
+	BrkdwnApp().run() # textual app TUI
 
 if __name__ == "__main__":
 	main()

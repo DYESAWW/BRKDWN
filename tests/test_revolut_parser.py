@@ -4,6 +4,7 @@ def test_csv_to_dict_revolut():
 	result = csv_to_dict_revolut("tests/samples/anon-statement-revolut-short.csv")
 
 	assert result == {
+		"IBAN": ["Revolut (IBAN unknown)", "Revolut (IBAN unknown)"],
 		"date": ["20220601", "20220604"],
 		"description": ["Item-b1eee5fa", "Item-5aca29d2"],
 		"amount": [-4.37, 2.1],

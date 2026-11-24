@@ -12,6 +12,7 @@ from textual.widgets import Button, DirectoryTree
 class PickerTree(DirectoryTree):
 	BINDINGS = [Binding("enter", "pick", "Import")]    # replace tree widget Enter binding
 
+	# redeclare picking path to implement every input way (doubleclick, enter)
 	class PathPicked(Message):
 		def __init__(self, path: Path) -> None:
 			super().__init__()
@@ -28,10 +29,11 @@ class PickerTree(DirectoryTree):
 
 
 class FileSelector(ModalScreen[Path | None]):
-	BINDINGS = [
+	# this one should mirror global bindings as well
+	BINDINGS = [ 
 		Binding("escape", "cancel", "Cancel"),
 		Binding("q", "app.quit", "Quit"),
-	]
+	] 
 
 	def compose(self) -> ComposeResult:
 		yield Vertical(
@@ -62,17 +64,17 @@ class FileSelector(ModalScreen[Path | None]):
 		self.app.clear_notifications()
 		self.dismiss(path)
 
-	# Enter on a file: one press
+	# enter on a file (press once)
 	def on_picker_tree_path_picked(self, event: PickerTree.PathPicked) -> None:
 		self.app.clear_notifications()
 		self.dismiss(event.path)
 
-	# Confirm button
+	# confirm button
 	def on_button_pressed(self, event: Button.Pressed) -> None:
 		if event.button.id == "confirm":
 			self.confirm_selection()
 
-	# Double click (mouse only)
+	# double click (for mouse click)
 	def on_click(self, event: events.Click) -> None:
 		if event.chain != 2:
 			return
@@ -83,5 +85,5 @@ class FileSelector(ModalScreen[Path | None]):
 			self.confirm_selection()
 
 	def action_cancel(self) -> None:
-		self.app.clear_notifications()
+		self.app.clear_notifications() # this ensures that notifications aren't stacked
 		self.dismiss(None)

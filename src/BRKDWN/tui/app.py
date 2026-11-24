@@ -22,12 +22,12 @@ class BrkdwnApp(App):
 	BINDINGS = [
 		Binding("q", "app.quit", "Quit"),
 		Binding("escape", "app.pop_screen", "Back")
-	]
+	] # these bindings are global (excepting pushed screen like file_selector.py)
 
 	def on_mount(self) -> None:
 		self.register_theme(BRKDWN_THEME) # set theme
 		self.theme = "BRKDWN"
-		if IsEmptyDB():
+		if IsEmptyDB(): # offer to import bank statement in case no database presented
 			self.push_screen(ImportScreen())
 		else:
 			self.push_screen(Transactions())

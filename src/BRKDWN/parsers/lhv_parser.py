@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_lhv(input_csv):
+def csv_to_dict_lhv(input_csv) -> dict | -1:
 	VALIDATION_DICT = {
 		"english": [
 			"Customer account no", "Document no", "Date", "Sender/receiver account", "Sender/receiver name", "Debit/Credit (D/C)", "Amount","Reference number","Archiving code", "Description", "Currency", "Personal code or register code", "Sender/receiver bank BIC", "Ultimate debtor name", "Transaction reference", "Account servicer reference"
@@ -14,6 +14,7 @@ def csv_to_dict_lhv(input_csv):
 	}
 
 	data = {
+		"IBAN": [],
 		"date": [],
 		"description": [],
 		"amount": [],
@@ -22,11 +23,12 @@ def csv_to_dict_lhv(input_csv):
 	with open(input_csv, encoding="utf-8") as csvfile:
 		reader = csv.reader(csvfile, delimiter=",") # set delimiter specific to each bank statement
 		first_row = next(reader, None) # skip first row
-		if first_row is None or first_row not in VALIDATION_DICT.values():
+		if first_row is None or first_row not in VALIDATION_DICT.values(): # compare headers to confirm file validity
 			return -1
 		for row in reader:
+			data["IBAN"].append(row[0])
 			data["date"].append(row[2].replace("-", "")) # write into only date without time and remove "-" symbol
 			data["description"].append(row[9])
-			data["amount"].append(float(row[6]))
 			data["currency"].append(row[10])
+			data["amount"].append(float(row[6]))
 	return data
