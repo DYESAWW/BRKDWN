@@ -10,7 +10,10 @@ from textual.widgets import Button, DirectoryTree
 
 
 class PickerTree(DirectoryTree):
-	BINDINGS = [Binding("enter", "pick", "Import")]    # replace tree widget Enter binding
+	BINDINGS = [
+		Binding("enter", "pick", "Import"),
+		Binding("escape", "app.pop_screen", "Back")
+	]    # replace tree widget Enter binding
 
 	# redeclare picking path to implement every input way (doubleclick, enter)
 	class PathPicked(Message):
@@ -61,12 +64,12 @@ class FileSelector(ModalScreen[Path | None]):
 		if path is None:
 			self.notify("Highlight a file first", severity="warning")
 			return
-		self.app.clear_notifications()
+		#self.clear_notifications()
 		self.dismiss(path)
 
 	# enter on a file (press once)
 	def on_picker_tree_path_picked(self, event: PickerTree.PathPicked) -> None:
-		self.app.clear_notifications()
+		#self.clear_notifications()
 		self.dismiss(event.path)
 
 	# confirm button
@@ -85,5 +88,5 @@ class FileSelector(ModalScreen[Path | None]):
 			self.confirm_selection()
 
 	def action_cancel(self) -> None:
-		self.app.clear_notifications() # this ensures that notifications aren't stacked
+		#self.clear_notifications() # this ensures that notifications aren't stacked
 		self.dismiss(None)

@@ -1,3 +1,4 @@
+from textual.binding import Binding
 from pathlib import Path
 from BRKDWN.parsers.lhv_parser import csv_to_dict_lhv
 from BRKDWN.parsers.swedbank_parser import csv_to_dict_swedbank
@@ -6,7 +7,7 @@ from BRKDWN.db import insert_from_parser_to_db
 
 from textual.app import ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static, Button
+from textual.widgets import Static, Button, Footer
 from textual.containers import Vertical, Horizontal
 from BRKDWN.tui.screens.file_selector import FileSelector
 from BRKDWN.tui.screens.transactions import Transactions
@@ -33,13 +34,13 @@ class ImportScreen(Screen):
 				),
 				classes="center",
 			),
-			Button("ABOUT", id="about-button", classes="button"),  # TODO: add about page
 			id="layout",
 		)
+		yield Footer(show_command_palette=False)
 
 	def on_button_pressed(self, event: Button.Pressed) -> None:
 		if event.button.id == "import":
-			self.app.clear_notifications()
+			#self.app.clear_notifications()
 			self.app.push_screen(FileSelector(), self.on_file_chosen) # push file selector on top
 
 	def on_file_chosen(self, path: Path | None) -> None:
@@ -58,8 +59,9 @@ class ImportScreen(Screen):
 			data = parse(path)
 			if data != -1: # one of the parsers will return data instead of -1
 				insert_from_parser_to_db(data)
-				self.app.clear_notifications()
+				#self.clear_notifications()
 				self.notify(f"Imported {path.name}")
+				 
 				self.app.switch_screen(Transactions())
 				return
 		# every parser failed on this point (probably unsupported bank)

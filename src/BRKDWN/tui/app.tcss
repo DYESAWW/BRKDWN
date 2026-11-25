@@ -4,6 +4,8 @@ $base: #181926;
 $surface: #1e2030;
 $text: #cad3f5;
 
+#layout { height: 1fr; }
+
 Static {
 	color: $accent;
 }
@@ -74,4 +76,15 @@ DirectoryTree {
 .tree--cursor {
 	background: $accent;
 	color: $base;
+}
+
+DataTable {
+	scrollbar-size-vertical: 1;
+	scrollbar-size-horizontal: 1;
+	height: 1fr;
+}
+
+.prevent_footer_overlap {
+	dock: none;
+	height: 1;
 }
