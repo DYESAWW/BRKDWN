@@ -50,7 +50,7 @@ def insert_from_parser_to_db(data):
 					),
 				)
 
-def sum_incomes() -> float | 0:
+def sum_incomes() -> float:
 	"""Sum incomes for further balance calculation"""
 	with closing(get_connection()) as connection:
 		result = connection.execute(# everything is calculated in sqlite request
@@ -63,7 +63,7 @@ def sum_incomes() -> float | 0:
 	# return 0 in case database is empty
 	return result["total"] or 0 # result["total"] may be None in case db is empty
 
-def sum_costs() -> float | 0:
+def sum_costs() -> float:
 	"""Sum costs for further balance calculation"""
 	with closing(get_connection()) as connection:
 		result = connection.execute(

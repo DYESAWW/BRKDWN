@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_lhv(input_csv) -> dict | -1:
+def csv_to_dict_lhv(input_csv) -> dict | int:
 	VALIDATION_DICT = {
 		"english": [
 			"Customer account no", "Document no", "Date", "Sender/receiver account", "Sender/receiver name", "Debit/Credit (D/C)", "Amount","Reference number","Archiving code", "Description", "Currency", "Personal code or register code", "Sender/receiver bank BIC", "Ultimate debtor name", "Transaction reference", "Account servicer reference"

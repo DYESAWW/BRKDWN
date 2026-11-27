@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_revolut(input_csv) -> dict | -1:
+def csv_to_dict_revolut(input_csv) -> dict | int:
 	VALIDATION_DICT = {
 		"english": [
 			'Type', 'Product', 'Started Date', 'Completed Date', 'Description', 'Amount', 'Fee', 'Currency', 'State', 'Balance'
