@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_swedbank(input_csv) -> dict | int:
+def csv_to_dict_swedbank(input_csv) -> dict | None:
 	VALIDATION_DICT = {
 		"estonian": [
 			"Kliendi konto", "Reatüüp", "Kuupäev", "Saaja/Maksja", "Selgitus", "Summa", "Valuuta", "Deebet/Kreedit", "Arhiveerimistunnus", "Tehingu tüüp", "Viitenumber", "Dokumendi number"

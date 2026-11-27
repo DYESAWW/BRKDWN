@@ -57,7 +57,7 @@ class ImportScreen(Screen):
 
 		for parse in PARSERS: 
 			data = parse(path)
-			if data != -1: # one of the parsers will return data instead of -1
+			if data is not None: # one of the parsers will return data instead of None
 				insert_from_parser_to_db(data)
 				#self.clear_notifications()
 				self.notify(f"Imported {path.name}")

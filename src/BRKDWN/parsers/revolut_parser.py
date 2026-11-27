@@ -1,6 +1,6 @@
 import csv
 
-def csv_to_dict_revolut(input_csv) -> dict | int:
+def csv_to_dict_revolut(input_csv) -> dict | None:
 	VALIDATION_DICT = {
 		"english": [
 			'Type', 'Product', 'Started Date', 'Completed Date', 'Description', 'Amount', 'Fee', 'Currency', 'State', 'Balance'
@@ -31,5 +31,5 @@ def csv_to_dict_revolut(input_csv) -> dict | int:
 				data["currency"].append(row[7])
 				data["amount"].append(float(row[5]))
 		else:
-			return -1 # gotta check this to ensure that parse was successful
+			return None # gotta check this to ensure that parse was successful
 	return data
