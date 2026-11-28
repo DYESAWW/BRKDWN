@@ -88,3 +88,38 @@ DataTable {
 	dock: none;
 	height: 1;
 }
+
+/* About screen */
+
+#about-content {
+    height: 1fr;
+    padding: 1 4;
+    background: $surface;
+}
+
+#about-content Static {
+    color: $text;
+    height: auto;
+}
+
+#about-title {
+    color: $primary;
+    text-align: center;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.about-box {
+    border: round $primary;
+    background: #24273a;
+    height: auto;
+    padding: 1 2;
+    margin-bottom: 1;
+}
+
+#about-content .about-heading {
+    color: $primary;
+    text-style: bold;
+    border-bottom: solid $primary;
+    margin-bottom: 1;
+}
